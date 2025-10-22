@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface KafkaListenerDeadLetterRepository extends MongoRepository<KafkaListenerDeadLetterDocument, ObjectId> {
     List<KafkaListenerDeadLetterDocument> findByIsCompletedOrderByCreatedAtDesc(Boolean isCompleted, Pageable pageable);
+    List<KafkaListenerDeadLetterDocument> findByMessageKey(String messageKey);
 }

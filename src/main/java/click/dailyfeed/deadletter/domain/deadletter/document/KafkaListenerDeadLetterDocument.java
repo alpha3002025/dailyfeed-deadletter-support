@@ -62,6 +62,13 @@ public class KafkaListenerDeadLetterDocument {
                 .build();
     }
 
+    public static KafkaListenerDeadLetterDocument newDeadLetter(String messageKey, String payload, MemberActivityType.Category category) {
+        return KafkaListenerDeadLetterDocument.newInstanceBuilder()
+                .payload(payload)
+                .category(category)
+                .build();
+    }
+
     public void markAsCompleted() {
         this.isCompleted = Boolean.TRUE;
     }
