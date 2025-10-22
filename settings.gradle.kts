@@ -1,1 +1,1 @@
-rootProject.name = "deadletter"
+rootProject.name = "dailyfeed-deadletter-support"
