@@ -25,6 +25,7 @@ repositories {
 }
 
 dependencies {
+	implementation(project(":dailyfeed-code"))
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	compileOnly("org.projectlombok:lombok")
