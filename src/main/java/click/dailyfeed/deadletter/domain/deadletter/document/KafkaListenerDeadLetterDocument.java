@@ -35,6 +35,9 @@ public class KafkaListenerDeadLetterDocument {
     @Field("category")
     private MemberActivityType.Category category;
 
+    @Field("message_key")
+    private String messageKey;
+
     @CreatedDate
     @Field("created_at")
     private LocalDateTime createdAt;
@@ -44,11 +47,12 @@ public class KafkaListenerDeadLetterDocument {
     private LocalDateTime updatedAt;
 
     @Builder(builderMethodName = "newInstanceBuilder", builderClassName = "ListenerDeadLetterDocument")
-    private KafkaListenerDeadLetterDocument(String payload, MemberActivityType.Category category) {
+    private KafkaListenerDeadLetterDocument(String payload, MemberActivityType.Category category, String messageKey) {
         this.payload = payload;
         this.isCompleted = Boolean.FALSE;
         this.isEditing = Boolean.FALSE;
         this.category = category;
+        this.messageKey = messageKey;
     }
 
     public static KafkaListenerDeadLetterDocument newDeadLetter(String payload, MemberActivityType.Category category) {
@@ -56,5 +60,9 @@ public class KafkaListenerDeadLetterDocument {
                 .payload(payload)
                 .category(category)
                 .build();
+    }
+
+    public void markAsCompleted() {
+        this.isCompleted = Boolean.TRUE;
     }
 }
