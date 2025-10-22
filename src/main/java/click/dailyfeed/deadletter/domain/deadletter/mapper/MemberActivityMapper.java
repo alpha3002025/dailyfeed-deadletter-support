@@ -21,4 +21,22 @@ public class MemberActivityMapper {
                 .activityType(activityType)
                 .build();
     }
+
+    public MemberActivityDto.CommentActivityRequest newCommentActivityRequest(Long memberId, Long postId, Long commentId, MemberActivityType activityType) {
+        return MemberActivityDto.CommentActivityRequest.builder()
+                .memberId(memberId)
+                .postId(postId)
+                .commentId(commentId)
+                .activityType(activityType)
+                .build();
+    }
+
+    public MemberActivityDto.CommentLikeActivityRequest newCommentLikeActivityRequest(Long memberId, Long postId, Long commentId, MemberActivityType activityType) {
+        return MemberActivityDto.CommentLikeActivityRequest.builder()
+                .memberId(memberId)
+                .postId(postId)
+                .commentId(commentId)
+                .activityType(activityType)
+                .build();
+    }
 }
