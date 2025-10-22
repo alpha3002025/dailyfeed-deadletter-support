@@ -57,4 +57,8 @@ public class FeignDeadLetterDocument {
                 .category(category)
                 .build();
     }
+
+    public void markAsCompleted() {
+        this.isCompleted = Boolean.TRUE;
+    }
 }
