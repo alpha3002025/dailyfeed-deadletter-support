@@ -23,7 +23,7 @@ public class KafkaPublisherDeadLetterService {
     public void createPostActivityDeadLetter(MemberActivityDto.PostActivityRequest request){
         try{
             KafkaPublisherDeadLetterDocument document = kafkaPublisherMapper.fromPostRequest(request);
-            kafkaPublisherDeadLetterMongoTemplate.insertKafkaPublisherDeadLetter(document);
+            kafkaPublisherDeadLetterMongoTemplate.upsertKafkaPublisherDeadLetter(document);
         }catch (JsonProcessingException e){
             throw new FeignApiSerializationFailException();
         }
@@ -32,7 +32,7 @@ public class KafkaPublisherDeadLetterService {
     public void createCommentActivityDeadLetter(MemberActivityDto.CommentActivityRequest request){
         try{
             KafkaPublisherDeadLetterDocument document = kafkaPublisherMapper.fromCommentRequest(request);
-            kafkaPublisherDeadLetterMongoTemplate.insertKafkaPublisherDeadLetter(document);
+            kafkaPublisherDeadLetterMongoTemplate.upsertKafkaPublisherDeadLetter(document);
         }catch (JsonProcessingException e){
             throw new FeignApiSerializationFailException();
         }
@@ -41,7 +41,7 @@ public class KafkaPublisherDeadLetterService {
     public void createPostLikeActivityDeadLetter(MemberActivityDto.PostLikeActivityRequest request){
         try{
             KafkaPublisherDeadLetterDocument document = kafkaPublisherMapper.fromPostLikeRequest(request);
-            kafkaPublisherDeadLetterMongoTemplate.insertKafkaPublisherDeadLetter(document);
+            kafkaPublisherDeadLetterMongoTemplate.upsertKafkaPublisherDeadLetter(document);
         }catch (JsonProcessingException e){
             throw new FeignApiSerializationFailException();
         }
@@ -50,7 +50,7 @@ public class KafkaPublisherDeadLetterService {
     public void createCommentLikeActivityDeadLetter(MemberActivityDto.CommentLikeActivityRequest request){
         try{
             KafkaPublisherDeadLetterDocument document = kafkaPublisherMapper.fromCommentLikeRequest(request);
-            kafkaPublisherDeadLetterMongoTemplate.insertKafkaPublisherDeadLetter(document);
+            kafkaPublisherDeadLetterMongoTemplate.upsertKafkaPublisherDeadLetter(document);
         }catch (JsonProcessingException e){
             throw new FeignApiSerializationFailException();
         }
