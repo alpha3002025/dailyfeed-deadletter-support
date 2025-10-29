@@ -1,7 +1,6 @@
 package click.dailyfeed.deadletter.domain.deadletter.document;
 
 import click.dailyfeed.code.domain.activity.type.MemberActivityType;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +8,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
  */
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Document(collection = "kafka_listener_dead_letters")
 public class KafkaListenerDeadLetterDocument {
     @Id
@@ -46,6 +45,21 @@ public class KafkaListenerDeadLetterDocument {
     @Field("updated_at")
     private LocalDateTime updatedAt;
 
+    @PersistenceCreator
+    public KafkaListenerDeadLetterDocument(
+            ObjectId id, String payload, Boolean isCompleted, Boolean isEditing,
+            MemberActivityType.Category category, String messageKey, LocalDateTime createdAt, LocalDateTime updatedAt
+    ){
+        this.id = id;
+        this.payload = payload;
+        this.isCompleted = isCompleted;
+        this.isEditing = isEditing;
+        this.category = category;
+        this.messageKey = messageKey;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     @Builder(builderMethodName = "newInstanceBuilder", builderClassName = "ListenerDeadLetterDocument")
     private KafkaListenerDeadLetterDocument(String payload, MemberActivityType.Category category, String messageKey) {
         this.payload = payload;
@@ -64,6 +78,7 @@ public class KafkaListenerDeadLetterDocument {
 
     public static KafkaListenerDeadLetterDocument newDeadLetter(String messageKey, String payload, MemberActivityType.Category category) {
         return KafkaListenerDeadLetterDocument.newInstanceBuilder()
+                .messageKey(messageKey)
                 .payload(payload)
                 .category(category)
                 .build();
